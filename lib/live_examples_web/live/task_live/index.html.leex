@@ -24,14 +24,14 @@
         </form>
         </td>
         <td>
-        <%= for {task, id} <- Enum.filter(@tasks, &(not &1["done"])) |> Enum.with_index do %>
-          <article id="task-<%= id %>">
+        <%= for {task, id} <- @tasks |> Enum.with_index do %>
+          <article id="task-<%= id %>" phx-click="done"  phx-value-id="<%= id %>">
             <%= task["title"] %>
           </article>
         <% end %>
         </td>
         <td>
-        <%= for task <- Enum.filter(@tasks, &( &1["done"]))  do %>
+        <%= for task <- @done  do %>
           <article >
             <%= task["title"] %>
           </article>

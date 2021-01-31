@@ -7,8 +7,12 @@ defmodule LiveExamplesWeb.TaskLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
-      assign(socket, :tasks, [])
-      |> assign(:changeset, Todos.new_change_task() )
+      assign(socket,
+      %{
+        :tasks => [],
+        :done => [],
+        :changeset => Todos.new_change_task(),
+      })
     }
   end
 
@@ -46,6 +50,16 @@ defmodule LiveExamplesWeb.TaskLive.Index do
   @impl true
   def handle_event("save", %{"task" => task_params}, socket) do
     {:noreply, add_task(socket, task_params) }
+  end
+
+  @impl true
+  def handle_event("done", %{"id" => index}, socket) do
+    {done_task, updated_tasks} = List.pop_at(socket.assigns.tasks, String.to_integer(index))
+    {:noreply,
+      socket
+      |> assign(:tasks, updated_tasks)
+      |> assign(:done, socket.assigns.done ++ [done_task])
+     }
   end
 
   @impl true
