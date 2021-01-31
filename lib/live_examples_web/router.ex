@@ -18,6 +18,8 @@ defmodule LiveExamplesWeb.Router do
     pipe_through :browser
 
     live "/", CounterLive
+    live "/todo", TaskLive.Index, :index
+
   end
 
   # Other scopes may use custom stacks.
