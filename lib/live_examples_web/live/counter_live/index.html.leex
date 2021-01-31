@@ -1,0 +1,21 @@
+<h1>Listing Counters</h1>
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="counters">
+
+    <%= for {name, count} <- @counters do %>
+      <p>Counter <%= name %></br><button phx-click="dec" value="<%= name %>">-</button><%= count %><button phx-click="inc" value="<%= name %>">+</button></p>
+    <% end %>
+    <button phx-click="add-counter" >Add Counter</button>
+          <div class="ui divider"></div>
+
+
+  </tbody>
+</table>
+
+<span>

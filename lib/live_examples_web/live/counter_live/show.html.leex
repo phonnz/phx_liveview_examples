@@ -1,0 +1,17 @@
+<h1>Show Counter</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, LiveExamplesWeb.CounterLive.FormComponent,
+    id: @counter.id,
+    title: @page_title,
+    action: @live_action,
+    counter: @counter,
+    return_to: Routes.counter_show_path(@socket, :show, @counter) %>
+<% end %>
+
+<ul>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.counter_show_path(@socket, :edit, @counter), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.counter_index_path(@socket, :index) %></span>
